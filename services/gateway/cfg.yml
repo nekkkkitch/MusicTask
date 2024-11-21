@@ -1,0 +1,12 @@
+db:
+  host: "db"
+  port: 5432
+  user: "user"
+  password: "123"
+  dbname: "MusicLibDB"
+rtr:
+  port: ":8082"
+  host: ""
+ses:
+  port: ":8083"
+  host: "ses"
