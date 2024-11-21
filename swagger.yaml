@@ -1,0 +1,106 @@
+basePath: /
+host: localhost:8082
+info:
+  contact: {}
+  title: Music Library API
+  version: "1.0"
+paths:
+  /lib:
+    get:
+      description: Возвращает список песен с пагинацией
+      parameters:
+      - description: Songs per page
+        in: query
+        name: limit
+        required: true
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+  /song:
+    delete:
+      description: Удалить существующую песню
+      parameters:
+      - description: Song title
+        in: query
+        name: song
+        required: true
+        type: string
+      - description: Group
+        in: query
+        name: group
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+    get:
+      description: Возвращает текст песни по куплетам
+      parameters:
+      - description: Song title
+        in: query
+        name: song
+        required: true
+        type: string
+      - description: Group
+        in: query
+        name: group
+        required: true
+        type: string
+      - description: Couplets per page
+        in: query
+        name: limit
+        required: true
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+    post:
+      description: Добавление песни
+      parameters:
+      - description: Need group and song
+        in: body
+        name: song
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+    put:
+      description: Изменить существующую песню
+      parameters:
+      - description: Song title
+        in: query
+        name: song
+        required: true
+        type: string
+      - description: Group
+        in: query
+        name: group
+        required: true
+        type: string
+      - description: you can change releaseDate, text or link
+        in: body
+        name: changes
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+schemes:
+- http
+swagger: "2.0"
