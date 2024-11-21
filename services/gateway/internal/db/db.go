@@ -70,6 +70,9 @@ func (d *DB) GetSong(group, title string) (models.Song, error) {
 		title, group).Scan(&song_text)
 	if err != nil {
 		log.Println("Failed to scan song:", err)
+		if err == pgx.ErrNoRows {
+			return models.Song{}, fmt.Errorf("no song with such title and group")
+		}
 		return models.Song{}, err
 	}
 	log.Println("Successfully got song text from db")
@@ -159,9 +162,8 @@ func (d *DB) TryAddGroup(group string) error {
 }
 
 func (d *DB) SongInDB(group, song string) bool {
-	log.Println("Checking if song is in db")
 	var id pgtype.Int4
 	_ = d.db.QueryRow(context.Background(), `select id from public.songs where "group"=$1 and song=$2`, group, song).Scan(&id)
-	log.Println(id)
+	log.Println("Checking if song is in db:", id.Int32 > 0)
 	return id.Int32 > 0
 }

@@ -18,3 +18,9 @@ services:
       - "8082:8082"
     depends_on:
       - db
+  ses:
+    build:
+      dockerfile: services/ses/Dockerfile
+      context: .
+    ports:
+      - "8083:8083"

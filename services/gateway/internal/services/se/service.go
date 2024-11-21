@@ -27,7 +27,7 @@ func New(cfg *Config) (*Service, error) {
 
 func (s *Service) EnrichSong(group, title string) (models.Song, error) {
 	log.Println("Trying to enrich song")
-	request, err := http.NewRequest("GET", fmt.Sprintf("%v/info?group=%v&song=%v", s.addr, group, title), nil)
+	request, err := http.NewRequest("GET", fmt.Sprintf("http://%v/info?group=%v&song=%v", s.addr, group, title), nil)
 	if err != nil {
 		log.Println("Failed to create request:", err)
 		return models.Song{}, err

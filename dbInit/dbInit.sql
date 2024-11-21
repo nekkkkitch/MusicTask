@@ -26,3 +26,5 @@ create table if not exists public.songs(
     "text" text,
     link text
 );
+
+create index group_name on public.songs("group")

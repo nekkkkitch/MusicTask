@@ -56,7 +56,9 @@ func (s *Service) GetSong(group, title string, page, limit int) (string, error) 
 			break
 		}
 		text += partedSong[page*limit+i]
-		text += "\n\n"
+		if i != limit-1 {
+			text += "\n\n"
+		}
 	}
 	return text, nil
 }
